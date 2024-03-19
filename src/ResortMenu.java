@@ -213,8 +213,8 @@ public class ResortMenu {
 			e.printStackTrace();
 			return;
 		}
-        
-        sql = "DELETE FROM BreakfastService WHERE serviceID IN (SELECT serviceID FROM HotelService WHERE emailAddress = 'emily.clark@example.com');";//delete breakfast services associated with account 
+        try {
+		sql = "DELETE FROM BreakfastService WHERE serviceID IN (SELECT serviceID FROM HotelService WHERE emailAddress = 'emily.clark@example.com');";//delete breakfast services associated with account 
         sendUpdateRequest(statement, sql);	
         sql = "DELETE FROM GolfCartService WHERE serviceID IN (SELECT serviceID FROM HotelService WHERE emailAddress = 'emily.clark@example.com');";//delete golfcartservice associated with account
         sendUpdateRequest(statement, sql);
@@ -225,6 +225,11 @@ public class ResortMenu {
         sql = "DELETE FROM CustomerAccount WHERE emailAddress = '"+email+"'";//delete customer account associated with emailaddress
 		sendUpdateRequest(statement, sql);
         System.out.println("Customer account deleted successfully...");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+        	System.out.println("An error occurred while attempting to delete the account and its associated records.");
+		}     
 	}
 
 	private static void option4(Statement statement, String email, String reservationType, String numDays, String numPeople, String pickupTime, String airportName, String date) {
