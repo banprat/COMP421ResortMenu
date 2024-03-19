@@ -217,15 +217,12 @@ public class ResortMenu {
         sql = "DELETE FROM BreakfastService WHERE serviceID IN (SELECT serviceID FROM HotelService WHERE emailAddress = 'emily.clark@example.com');";//delete breakfast services associated with account 
         sendUpdateRequest(statement, sql);	
         sql = "DELETE FROM GolfCartService WHERE serviceID IN (SELECT serviceID FROM HotelService WHERE emailAddress = 'emily.clark@example.com');";//delete golfcartservice associated with account
-
         sendUpdateRequest(statement, sql);
-        sql = "";//delete trips associated with account
+        sql = "DELETE FROM HotelService WHERE emailAddress = 'emily.clark@example.com';";//delete hotel services associated with account
         sendUpdateRequest(statement, sql);
-        sql = "";//delete hotel services associated with account
+        sql = "DELETE FROM Trip WHERE emailAddress = 'emily.clark@example.com';";//delete trips associated with account
         sendUpdateRequest(statement, sql);
-
-                
-        sql = "DELETE FROM CustomerAccount WHERE emailAddress = '"+email+"'";
+        sql = "DELETE FROM CustomerAccount WHERE emailAddress = '"+email+"'";//delete customer account associated with emailaddress
 		sendUpdateRequest(statement, sql);
         System.out.println("Customer account deleted successfully...");
 	}
